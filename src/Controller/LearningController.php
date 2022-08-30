@@ -32,7 +32,7 @@ class LearningController extends AbstractController
         $hello = "lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut";
 
         return $this->render('learning/example.html.twig', [
-            'name' => 'lucas',
+            'name' => 'becode',
             'lorem' => $hello,
         ]);
     }
