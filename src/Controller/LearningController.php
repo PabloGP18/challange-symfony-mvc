@@ -60,9 +60,10 @@ class LearningController extends AbstractController
 
         if($form-> isSubmitted() && $form->isValid())
         {
-
             $name = $user-> getName();
-
+            return $this->render('learning/index.html.twig', [
+                'name' => $name,
+            ]);
         }
 
 
@@ -70,8 +71,7 @@ class LearningController extends AbstractController
             'name' => $name,
             'form' => $form -> createView(),
         ]);
-
-
     }
+
 
 }
