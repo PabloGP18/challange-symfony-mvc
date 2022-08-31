@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\PostType;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class LearningController extends AbstractController
 {
@@ -36,4 +39,39 @@ class LearningController extends AbstractController
             'lorem' => $hello,
         ]);
     }
+
+
+
+
+    #[Route('/', name: 'app_show_my_name')]
+    public function showMyName(Request $request): Response{
+
+        $user = new User();
+        $form = $this->createForm(PostType::class, $user, [
+            'action' => $this->generateUrl('app_show_my_name'),
+            'method' => 'post'
+        ]);
+
+
+        $form->handleRequest($request);
+
+        $name ='Unknown';
+
+
+        if($form-> isSubmitted() && $form->isValid())
+        {
+
+            $name = $user-> getName();
+
+        }
+
+
+        return $this->render('learning/showmyname.html.twig', [
+            'name' => $name,
+            'form' => $form -> createView(),
+        ]);
+
+
+    }
+
 }
